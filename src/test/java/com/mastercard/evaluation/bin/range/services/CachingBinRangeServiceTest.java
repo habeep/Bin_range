@@ -36,32 +36,31 @@ public class CachingBinRangeServiceTest {
 		cachingBinRangeService.refreshCache();
 	}
 
-	/*
-	 * @Test public void shouldFindTheCorrectRangeForAGivenPan() { String
-	 * panWithinSomeTestBankRange = "4263123412341234";
-	 * 
-	 * Optional<BinRangeInfo> binRangeInfoOptional =
-	 * cachingBinRangeService.findBinRangeInfoByPan(panWithinSomeTestBankRange);
-	 * 
-	 * assertTrue(binRangeInfoOptional.isPresent());
-	 * assertNotNull(binRangeInfoOptional.get());
-	 * assertThat(binRangeInfoOptional.get().getRef(),
-	 * is(UUID.fromString("2A480C8A-83CA-4BB7-95B7-F19CEC97B3FD")));
-	 * assertThat(binRangeInfoOptional.get().getStart(), is(new
-	 * BigDecimal("4263000000000000")));
-	 * assertThat(binRangeInfoOptional.get().getEnd(), is(new
-	 * BigDecimal("4263999999999999")));
-	 * assertThat(binRangeInfoOptional.get().getBankName(), is("AIB"));
-	 * assertThat(binRangeInfoOptional.get().getCurrencyCode(), is("EUR")); }
-	 * 
-	 * @Test public void shouldFailToFindTheCorrectRangeForANonExistentPan() {
-	 * String panWithinSomeTestBankRange = "6263123412341234";
-	 * 
-	 * Optional<BinRangeInfo> binRangeInfoOptional =
-	 * cachingBinRangeService.findBinRangeInfoByPan(panWithinSomeTestBankRange);
-	 * 
-	 * assertFalse(binRangeInfoOptional.isPresent()); }
-	 */
+	@Test
+	public void shouldFindTheCorrectRangeForAGivenPan() {
+		String panWithinSomeTestBankRange = "4263123412341234";
+
+		Optional<BinRangeInfo> binRangeInfoOptional = cachingBinRangeService
+				.findBinRangeInfoByPan(panWithinSomeTestBankRange);
+
+		assertTrue(binRangeInfoOptional.isPresent());
+		assertNotNull(binRangeInfoOptional.get());
+		assertThat(binRangeInfoOptional.get().getRef(), is(UUID.fromString("2A480C8A-83CA-4BB7-95B7-F19CEC97B3FD")));
+		assertThat(binRangeInfoOptional.get().getStart(), is(new BigDecimal("4263000000000000")));
+		assertThat(binRangeInfoOptional.get().getEnd(), is(new BigDecimal("4263999999999999")));
+		assertThat(binRangeInfoOptional.get().getBankName(), is("AIB"));
+		assertThat(binRangeInfoOptional.get().getCurrencyCode(), is("EUR"));
+	}
+
+	@Test
+	public void shouldFailToFindTheCorrectRangeForANonExistentPan() {
+		String panWithinSomeTestBankRange = "6263123412341234";
+
+		Optional<BinRangeInfo> binRangeInfoOptional = cachingBinRangeService
+				.findBinRangeInfoByPan(panWithinSomeTestBankRange);
+
+		assertFalse(binRangeInfoOptional.isPresent());
+	}
 
 	@Test
 	@Ignore("Problem 1 - The CachingBinRangeService should be updated to maintain a valid cache, where a valid cache reflects the latest source of truth")
